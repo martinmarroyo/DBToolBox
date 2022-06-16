@@ -153,7 +153,7 @@ def db_insertion(
     )
 
 
-def connect_pgdb():
+def connect_db():
     """
     Returns a Connection to the Postgres database
     """
@@ -163,7 +163,7 @@ def connect_pgdb():
     return connection
 
 
-def get_alchemy_engine_pgdb():
+def get_alchemy_engine_db():
     """
     Returns a SQLAlchemy engine that
     is connected to the Postgres database
@@ -181,7 +181,7 @@ def get_alchemy_engine_pgdb():
         raise
 
 
-def get_alchemy_connection_pgdb(stream=False, max_row_buffer=100):
+def get_alchemy_connection_db(stream=False, max_row_buffer=100):
     """
     Returns a SQLAlchemy connection to the Postgres for the given engine. If one
     is not provided, an engine is generated to return a connection.
@@ -204,7 +204,7 @@ def get_alchemy_connection_pgdb(stream=False, max_row_buffer=100):
         raise
 
 
-def query_pgdb(
+def query_db(
     query,
     connection=None,
     stream=False,
@@ -254,7 +254,7 @@ def query_pgdb(
         print(f"Error occurred while querying the database: {str(e)}")
 
 
-def insert_pgdb(
+def insert_db(
     data: pd.DataFrame,
     table: str,
     schema: str = "public",
