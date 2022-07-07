@@ -1,4 +1,5 @@
 import psycopg2
+from psycopg2 import OperationalError
 from sqlalchemy import create_engine
 import datetime
 import os
@@ -8,24 +9,23 @@ from dotenv import dotenv_values
 # Load db configuration
 config = dotenv_values(".env")
 
-
 def db_connection(user: str, password: str, host: str, port: int, dbname: str):
     """
     Returns a Connection object for the
-    specified server(Nursery,Greenhouse,Garden)
+    specified server
     """
     try:
         connection = psycopg2.connect(
             user=user, password=password, host=host, port=port, dbname=dbname
         )
         return connection
-    except KeyError:
+    except (KeyError, OperationalError):
         print("One of your input parameters is incorrect.")
         print("Please try again.")
         raise
-    except:
-        print("Something went wrong. Please try again.")
-        raise
+    # except OperationalError:
+    #     print("Something went wrong. Please try again.")
+    #     raise
 
 
 def get_alchemy_engine(server_name: str):
