@@ -9,6 +9,7 @@ from dotenv import dotenv_values
 # Load db configuration
 config = dotenv_values(".env")
 
+
 def db_connection(user: str, password: str, host: str, port: int, dbname: str):
     """
     Returns a Connection object for the

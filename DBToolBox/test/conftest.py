@@ -10,7 +10,7 @@ def mock_config():
         "PORT": "port",
         "DB": "Database.name",
         "DRIVER": "Driver.name",
-        "DIALECT": "Dialect"
+        "DIALECT": "Dialect",
     }
 
 
@@ -21,7 +21,7 @@ def mock_config_missing_user():
         "PWD": "password",
         "PORT": "port",
         "DB": "Database.name",
-        "DRIVER": "Driver.name"
+        "DRIVER": "Driver.name",
     }
 
 
@@ -32,7 +32,7 @@ def mock_config_missing_server():
         "USER": "username",
         "PORT": "port",
         "DB": "Database.name",
-        "DRIVER": "Driver.name"
+        "DRIVER": "Driver.name",
     }
 
 
@@ -43,7 +43,7 @@ def mock_config_missing_pwd():
         "USER": "username",
         "PORT": "port #",
         "DB": "Database.name",
-        "DRIVER": "Driver.name"
+        "DRIVER": "Driver.name",
     }
 
 
@@ -54,12 +54,26 @@ def mock_config_missing_port():
         "PWD": "password",
         "USER": "username",
         "DB": "Database.name",
-        "DRIVER": "Driver.name"
-    } 
+        "DRIVER": "Driver.name",
+    }
 
 
 @pytest.fixture(scope="function")
 def mock_config_url():
-    return {
-        "URL": "database:connection.string"
-    }
+    return {"URL": "database:connection.string"}
+
+
+@pytest.fixture
+def mock_env_bash_url(monkeypatch):
+    monkeypatch.setenv("URL", "sqlite://")
+
+
+@pytest.fixture
+def mock_env_std_config(monkeypatch):
+    monkeypatch.setenv("SERVER", "database.server.address")
+    monkeypatch.setenv("PWD", "password")
+    monkeypatch.setenv("USER", "username")
+    monkeypatch.setenv("PORT", "port")
+    monkeypatch.setenv("DB", "Database.name")
+    monkeypatch.setenv("DRIVER", "Driver.name")
+    monkeypatch.setenv("DIALECT", "Dialect")
