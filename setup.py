@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name = 'DBToolBox',
-    version = '0.0.7',
+    version = '0.0.8',
     author = 'Martin Arroyo',
     author_email = 'martinm.arroyo7@gmail.com',
     packages = ['DBToolBox'],

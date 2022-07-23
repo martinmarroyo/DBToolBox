@@ -106,11 +106,11 @@ class DataConnector:
             url = connection_string
             if url is None:
                 url = self.generate_connection_string()
-            print("Engine URL:", url)
             # If there is already an engine, dispose of it before creating a new one
             self.dispose_engine()
             engine = create_engine(url, echo=False)
             self.engine = engine
+            print("Engine is set! Engine URL:", url)
         except Exception as err:
             print(f"Error occurred during engine creation: {str(err)}")
             raise
