@@ -133,3 +133,6 @@ dmypy.json
 
 # Any environment files
 *.env
+
+# VS Code
+.vscode
