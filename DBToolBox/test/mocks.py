@@ -15,18 +15,18 @@ COLUMN_INFO_MOCK = pd.DataFrame(
 )
 
 CONFIG_MOCK = {
-    "SERVER": "database.server.address",
-    "PWD": "password",
-    "USER": "username",
-    "PORT": "port",
-    "DB": "Database.name",
-    "DRIVER": "Driver.name",
-    "DIALECT": "Dialect",
+    "DBC_SERVER": "database.server.address",
+    "DBC_PWD": "password",
+    "DBC_USER": "username",
+    "DBC_PORT": "port",
+    "DBC_DB": "Database.name",
+    "DBC_DRIVER": "Driver.name",
+    "DBC_DIALECT": "Dialect",
 }
-CONFIG_MOCK_URL = {"URL": "database:connection.string"}
+CONFIG_MOCK_DBC_URL = {"DBC_URL": "database:connection.string"}
 CONNECTION_STRING_STANDARD_MOCK = (
     "Dialect+Driver.name://username:password@database.server.address:port/Database.name"
 )
-CONNECTION_STRING_URL_MOCK = "database:connection.string"
+CONNECTION_STRING_DBC_URL_MOCK = "database:connection.string"
 MOCK_DF = pd.DataFrame({"test1": [1, 2, 3, 4], "test2": ["a", "b", "c", "d"]})
-CONFIG_INMEMORY_ENGINE = {"URL": "sqlite://"}
+CONFIG_INMEMORY_ENGINE = {"DBC_URL": "sqlite://"}

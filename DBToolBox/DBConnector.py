@@ -8,9 +8,9 @@ from sqlalchemy import create_engine
 
 def _validate_config(config: dict) -> bool:
     """Tests that a given configuration is valid"""
-    if "URL" in config:
+    if "DBC_URL" in config:
         return True
-    REQUIRED = set(["SERVER", "PWD", "USER", "PORT", "DB", "DRIVER", "DIALECT"])
+    REQUIRED = set(["DBC_SERVER", "DBC_PWD", "DBC_USER", "DBC_PORT", "DBC_DB", "DBC_DRIVER", "DBC_DIALECT"])
     return REQUIRED.issubset(set(config))
 
 
@@ -34,13 +34,13 @@ class DataConnector:
         1. By providing a connection string via the DBC_URL parameter in
            your configuration, or
         2. Ensuring the following variables are specific in your configuration:
-            SERVER: database.server.address
-            PWD: password
-            USER: username
-            PORT: port #
-            DB: Database name
-            DIALECT: The name of the RDBMS (e.g. Postgresql, MySQL, SQLServer, etc.)
-            DRIVER: The database driver being used (e.g. psycopg2)
+            DBC_SERVER: database.server.address
+            DBC_PWD: password
+            DBC_USER: username
+            DBC_PORT: port #
+            DBC_DB: Database name
+            DBC_DIALECT: The name of the RDBMS (e.g. Postgresql, MySQL, SQLServer, etc.)
+            DBC_DRIVER: The database driver being used (e.g. psycopg2)
         
         By default, the initialization method checks for a file in the root directory
         called ".env". If it finds that file, then it will validate it to ensure the 
@@ -139,12 +139,12 @@ class DataConnector:
         conf = self.config if config is None else config
         # Return the connection string given in the URL variable (if present)
         try:
-            if "URL" in conf:
-                return conf["URL"]
+            if "DBC_URL" in conf:
+                return conf["DBC_URL"]
             connection_string = (
-                f"{conf['DIALECT']}+{conf['DRIVER']}://{conf['USER']}"
-                f":{conf['PWD']}@{conf['SERVER']}"
-                f":{conf['PORT']}/{conf['DB']}"
+                f"{conf['DBC_DIALECT']}+{conf['DBC_DRIVER']}://{conf['DBC_USER']}"
+                f":{conf['DBC_PWD']}@{conf['DBC_SERVER']}"
+                f":{conf['DBC_PORT']}/{conf['DBC_DB']}"
             )
             return connection_string
         except KeyError as err:

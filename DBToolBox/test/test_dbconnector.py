@@ -27,7 +27,7 @@ def test_config_missing_port(mock_config_missing_port):
 
 
 def test_config_01():
-    expected = {"URL": "my.url"}
+    expected = {"DBC_URL": "my.url"}
     dc = DataConnector(expected)
     assert dc.config == expected
 
@@ -35,7 +35,7 @@ def test_config_01():
 def test_dbconnector_env_url_config(mock_env_bash_url):
     """
     Tests that DataConnector uses environment variables when 
-    the use_env flag is set to True for a URL-based configuration
+    the use_env flag is set to True for a DBC_URL-based configuration
     Pass Condition: The configuration is successfully set, 
             which is verified by the returned config object
     Fail Condition: Error or the configuration is None
@@ -77,9 +77,9 @@ def test_db_connector_env_and_sys_config():
     Pass Condition: Returned config includes variables from system and file environment
     Fail Condition: Error or config does not include all variables from system and file environment 
     """
-    dc = DataConnector(config=mocks.CONFIG_MOCK_URL, use_env=True, no_eng=True)
+    dc = DataConnector(config=mocks.CONFIG_MOCK_DBC_URL, use_env=True, no_eng=True)
     sys_env = dict(os.environ)
-    expected = mocks.CONFIG_MOCK_URL
+    expected = mocks.CONFIG_MOCK_DBC_URL
     expected.update(sys_env)
     result = dc.config
     assert result == expected
@@ -108,11 +108,11 @@ def test_validate_config_02():
 
 def test_validate_config_03():
     """
-    Tests that _validate_config correctly evaluates a configuration file with a defined URL
+    Tests that _validate_config correctly evaluates a configuration file with a defined DBC_URL
     Pass Condition: Function returns True
     Fail Condition: Error or function returns False
     """
-    result = _validate_config(mocks.CONFIG_MOCK_URL)
+    result = _validate_config(mocks.CONFIG_MOCK_DBC_URL)
     assert result == True
 
 
@@ -120,13 +120,13 @@ def test_validate_config_03():
 def test_generate_connection_string_01():
     """
     Tests that generate_connection_string returns the expected connection
-    string given a configuration file with the URL parameter supplied
+    string given a configuration file with the DBC_URL parameter supplied
     Pass Condition: The expected connection string is returned
     Fail Condition: Error or incorrect string is returned
     """
-    dc = DataConnector(mocks.CONFIG_MOCK_URL)
+    dc = DataConnector(mocks.CONFIG_MOCK_DBC_URL)
     result = dc.generate_connection_string()
-    assert result == mocks.CONNECTION_STRING_URL_MOCK
+    assert result == mocks.CONNECTION_STRING_DBC_URL_MOCK
 
 
 def test_generate_connection_string_02():
@@ -152,9 +152,9 @@ def test_update_config_01():
     # Create DataConnector with original config
     dc = DataConnector(mocks.CONFIG_MOCK)
     # Update the config
-    dc.update_config(mocks.CONFIG_MOCK_URL)
+    dc.update_config(mocks.CONFIG_MOCK_DBC_URL)
     # Check that DataConnector is using the updated config
-    assert dc.config == mocks.CONFIG_MOCK_URL
+    assert dc.config == mocks.CONFIG_MOCK_DBC_URL
 
 
 def test_update_config_02():
@@ -206,8 +206,8 @@ def test_set_engine():
     # Set up DataConnector without engine
     dc = DataConnector(mocks.CONFIG_INMEMORY_ENGINE, no_eng=True)
     # Set engine
-    result = dc.set_engine() # Returns our connection URL
-    assert result == mocks.CONFIG_INMEMORY_ENGINE["URL"]
+    result = dc.set_engine() # Returns our connection DBC_URL
+    assert result == mocks.CONFIG_INMEMORY_ENGINE["DBC_URL"]
 
 
 ##----- dispose_engine tests
