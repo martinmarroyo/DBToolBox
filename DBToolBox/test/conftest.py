@@ -1,12 +1,65 @@
 import pandas as pd
+import pytest
 
-COLUMN_INFO_MOCK = pd.DataFrame({
-    'column_name': ['testcol1','testcol2','testcol3'],
-    'cardinality': [4, 4, 20],
-    'dtype': ['int64', 'object','int64'],
-    'cardinality_rating': ['LOW','LOW', 'HIGH'],
-    'variable_type': ['Numeric', 'Categorical', 'Numeric'],
-    'cardinality_pct': [0.2, 0.2, 1.0],
-    'nulls': [0, 2, 0],
-    'null_pct': [0.0, 0.1, 0.0]
-})
+@pytest.fixture(scope="function")
+def mock_config():
+    return {
+        "SERVER": "database.server.address",
+        "PWD": "password",
+        "USER": "username",
+        "PORT": "port",
+        "DB": "Database.name",
+        "DRIVER": "Driver.name",
+        "DIALECT": "Dialect"
+    }
+
+
+@pytest.fixture(scope="function")
+def mock_config_missing_user():
+    return {
+        "SERVER": "database.server.address",
+        "PWD": "password",
+        "PORT": "port",
+        "DB": "Database.name",
+        "DRIVER": "Driver.name"
+    }
+
+
+@pytest.fixture(scope="function")
+def mock_config_missing_server():
+    return {
+        "PWD": "password",
+        "USER": "username",
+        "PORT": "port",
+        "DB": "Database.name",
+        "DRIVER": "Driver.name"
+    }
+
+
+@pytest.fixture(scope="function")
+def mock_config_missing_pwd():
+    return {
+        "SERVER": "database.server.address",
+        "USER": "username",
+        "PORT": "port #",
+        "DB": "Database.name",
+        "DRIVER": "Driver.name"
+    }
+
+
+@pytest.fixture(scope="function")
+def mock_config_missing_port():
+    return {
+        "SERVER": "database.server.address",
+        "PWD": "password",
+        "USER": "username",
+        "DB": "Database.name",
+        "DRIVER": "Driver.name"
+    } 
+
+
+@pytest.fixture(scope="function")
+def mock_config_url():
+    return {
+        "URL": "database:connection.string"
+    }
